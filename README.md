@@ -24,5 +24,5 @@ pip install -r requirements.txt
 ## Run
 
 ```
-python redact-docx.py <input_file_path> <output_file_path>
+python main.py <input_file_path> <output_file_path>
 ```
