@@ -8,3 +8,4 @@ python-docx==0.8.10
 six==1.15.0
 toml==0.10.1
 wrapt==1.12.1
+python-pptx==0.6.18
