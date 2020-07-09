@@ -21,9 +21,13 @@ pip install -r requirements.txt
 ```
 
 ## Run
-
+For pptx-redactor : 
 ```
-python example.py <input_file_path> <output_file_path>
+python examples/pptx-example.py <input_file_path> <output_file_path>
+```
+For docx-redactor : 
+```
+python examples/docx.py <input_file_path> <output_file_path>
 ```
 
 ## Example Usage

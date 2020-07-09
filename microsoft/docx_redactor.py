@@ -1,4 +1,5 @@
 import re
+import logging
 
 from docx import Document
 
@@ -10,6 +11,11 @@ class DocxRedactor:
         self.replace_char = replace_char
 
     def __redact_helper__(self, doc_obj):
+        """
+        Helper function for the redact function
+        :param doc_obj (Document): the whole document as in the input .docx file
+        :return:
+        """
         for reg in self.regexes:
             regex = re.compile(reg)
             for p in doc_obj.paragraphs:
@@ -25,9 +31,16 @@ class DocxRedactor:
                         self.__redact_helper__(cell)
 
     def redact(self, output_file_path):
+        """
+        Redacts the given .docx file and writes result to output file
+        :param output_file_path (string): path of the file to write the result to
+        :return:
+        """
+        logging.basicConfig(level=logging.INFO)
+        logger = logging.getLogger("docx-redact")
         doc_obj = Document(self.doc_obj_path)
         self.__redact_helper__(doc_obj)
         doc_obj.save(output_file_path)
         if self.doc_obj_path == output_file_path:
-            print("Warning: Input and Output files are same!")
-        print("Updated file saved as: " + output_file_path)
+            logger.warning("Input and Output files are same!")
+        logging.info("Updated file saved as: " + output_file_path)
