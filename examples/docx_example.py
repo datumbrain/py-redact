@@ -1,20 +1,21 @@
-import sys
-import os.path
+from os import path
+import logging
 
 if __package__ is None:
     import sys
-    from os import path
-    sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
     from microsoft.docx_redactor import DocxRedactor
 else:
     from microsoft.docx_redactor import DocxRedactor
 
 
 def main():
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger("redact")
     if len(sys.argv) < 3:
-        print("Not enough arguments!")
-    elif os.path.isfile(sys.argv[1]) == 0:
-        print("No such file : " + sys.argv[1])
+        logger.error("Not Enough Arguments!")
+    elif path.isfile(sys.argv[1]) == 0:
+        logger.error("No such file : " + sys.argv[1])
     else:
         replace_char = '*'
         input_file = sys.argv[1]

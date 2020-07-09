@@ -1,4 +1,5 @@
 import re
+import logging
 
 from docx import Document
 
@@ -25,9 +26,11 @@ class DocxRedactor:
                         self.__redact_helper__(cell)
 
     def redact(self, output_file_path):
+        logging.basicConfig(level=logging.INFO)
+        logger = logging.getLogger("docx-redact")
         doc_obj = Document(self.doc_obj_path)
         self.__redact_helper__(doc_obj)
         doc_obj.save(output_file_path)
         if self.doc_obj_path == output_file_path:
-            print("Warning: Input and Output files are same!")
-        print("Updated file saved as: " + output_file_path)
+            logger.warning("Input and Output files are same!")
+        logging.info("Updated file saved as: " + output_file_path)
