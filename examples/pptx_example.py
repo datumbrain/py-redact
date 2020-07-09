@@ -1,7 +1,14 @@
 import sys
 import os.path
 
-from microsoft.pptx_redactor import PptxRedactor
+if __package__ is None:
+    import sys
+    from os import path
+    sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+    from microsoft.pptx_redactor import PptxRedactor
+else:
+    from microsoft.pptx_redactor import PptxRedactor
+
 
 
 def main():
@@ -13,7 +20,6 @@ def main():
         replace_char = '*'
         input_file = sys.argv[1]
         regexes = [r"""\d{3}-\d{2}-\d{4}""", r"""(([a-zA-Z0-9_\.+-]+)@([a-zA-Z0-9-]+)\.[a-zA-Z0-9-\.]+)"""]
-        #redactor = DocxRedactor(input_file, regexes, replace_char)
         redactor = PptxRedactor(input_file, regexes, replace_char)
         redactor.redact(sys.argv[2])
 

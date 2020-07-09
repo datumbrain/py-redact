@@ -12,7 +12,8 @@ class PptxRedactor:
     def __redact_helper__(self, shapes, notes_slides):
         """
 
-        :param doc_obj:
+        :param shapes:
+        :param notes_slides:
         :return:
         """
         for reg in self.regexes:
