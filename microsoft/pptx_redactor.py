@@ -11,9 +11,9 @@ class PptxRedactor:
 
     def __redact_helper__(self, shapes, notes_slides):
         """
-
-        :param shapes:
-        :param notes_slides:
+         Helper function for the redact function
+        :param shapes (list[shape]): list containing all shapes in all slides of the presentation
+        :param notes_slides (list[notes_slide]): list containing all notes_slides associated with every slide
         :return:
         """
         for reg in self.regexes:
@@ -45,10 +45,11 @@ class PptxRedactor:
 
     def redact(self, output_file_path):
         """
-
-        :param output_file_path:
+        Redacts the given .pptx file and writes result to output file
+        :param output_file_path (string): path of the file to write the result
         :return:
         """
+        help(self.__redact_helper__)
         logging.basicConfig(level=logging.INFO)
         logger = logging.getLogger("pptx-redact")
         prs = Presentation(self.ppt_obj_path)
