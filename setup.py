@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="py_redact",
-    version="0.0.4",
+    version="0.0.5",
     author="Fahad Siddiqui",
     author_email="fsdqui@gmail.com",
     description="A python package to redact documents by regexes.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/datumbrain/py_redact",
+    url="https://github.com/datumbrain/py-redact",
     packages=setuptools.find_packages(),
     install_requires=[
         'python-docx==0.8.10',
