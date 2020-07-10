@@ -3,10 +3,11 @@ import logging
 
 if __package__ is None:
     import sys
+
     sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-    from microsoft.docx_redactor import DocxRedactor
+    from py_redact.docx_redactor import DocxRedactor
 else:
-    from microsoft.docx_redactor import DocxRedactor
+    from py_redact.docx_redactor import DocxRedactor
 
 
 def main():

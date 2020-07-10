@@ -1,6 +1,9 @@
 import re
 import logging
+
 from pptx import Presentation
+
+logger = logging.getLogger("pptx-redact")
 
 
 class PptxRedactor:
@@ -28,20 +31,19 @@ class PptxRedactor:
                             for i in range(len(inline)):
                                 if regex.search(inline[i].text):
                                     text = regex.sub(self.replace_char * len(inline[i].text), inline[i].text)
-                                    inline[i].text = text                      
+                                    inline[i].text = text
                 if shape.has_table:
                     for row in shape.table.rows:
                         for cell in row.cells:
-                            if(regex.search(cell.text)):
+                            if (regex.search(cell.text)):
                                 text = regex.sub(self.replace_char * len(cell.text), cell.text)
                                 cell.text = text
             for notes_slide in notes_slides:
                 text_frame = notes_slide.notes_text_frame
                 m = regex.search(text_frame.text)
-                if(m):
+                if (m):
                     text = regex.sub(self.replace_char * len(text_frame.text), text_frame.text)
                     text_frame.text = text
-        pass
 
     def redact(self, output_file_path):
         """
@@ -50,8 +52,6 @@ class PptxRedactor:
         :return:
         """
         help(self.__redact_helper__)
-        logging.basicConfig(level=logging.INFO)
-        logger = logging.getLogger("pptx-redact")
         prs = Presentation(self.ppt_obj_path)
         # To get shapes in your slides
         slides = [slide for slide in prs.slides]
@@ -67,5 +67,3 @@ class PptxRedactor:
             logger.warning("Input and Output files are same!")
         logger.info(" Updated file saved as: " + output_file_path)
         prs.save(output_file_path)
-
-        pass

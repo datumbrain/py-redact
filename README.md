@@ -1,57 +1,33 @@
-# py-redact
+# py_redact
 
-Document redaction.
-
-## Make Virtual Env.
-
-```
-mkvirtualenv -p python3.7 py-redact
-```
-
-## Use `workon` to Use virtualenv Python Interpreter
-
-```
-workon py-redact
-```
+Document redaction library in Python.
 
 ## Install Requirements
 
 ```
-pip install -r requirements.txt
-```
-
-## Run
-For pptx-redactor : 
-```
-python examples/pptx-example.py <input_file_path> <output_file_path>
-```
-For docx-redactor : 
-```
-python examples/docx.py <input_file_path> <output_file_path>
+pip install py_redact
 ```
 
 ## Example Usage
 
+### Redact Microsoft Word Document
+
 ```python
-import sys
-import os.path
+from py_redact.docx_redactor import DocxRedactor
 
-from microsoft.docx_redactor import DocxRedactor
+replace_char = '*'
+regexes = [r"""\d{3}-\d{2}-\d{4}""", r"""(([a-zA-Z0-9_\.+-]+)@([a-zA-Z0-9-]+)\.[a-zA-Z0-9-\.]+)"""]
+redactor = DocxRedactor(input_file, regexes, replace_char)
+redactor.redact(output_file_path)
+```
 
+### Redact Microsoft Power Point Slide
 
-def main():
-    if len(sys.argv) < 3:
-        print("Not enough arguments!")
-    elif os.path.isfile(sys.argv[1]) == 0:
-        print("No such file : " + sys.argv[1])
-    else:
-        replace_char = '*'
-        input_file = sys.argv[1]
-        regexes = [r"""\d{3}-\d{2}-\d{4}""", r"""(([a-zA-Z0-9_\.+-]+)@([a-zA-Z0-9-]+)\.[a-zA-Z0-9-\.]+)"""]
-        redactor = DocxRedactor(input_file, regexes, replace_char)
-        redactor.redact(sys.argv[2])
+```python
+from py_redact.pptx_redactor import PptxRedactor
 
-
-if __name__ == "__main__":
-    main()
+replace_char = '*'
+regexes = [r"""\d{3}-\d{2}-\d{4}""", r"""(([a-zA-Z0-9_\.+-]+)@([a-zA-Z0-9-]+)\.[a-zA-Z0-9-\.]+)"""]
+redactor = PptxRedactor(input_file, regexes, replace_char)
+redactor.redact(output_file_path)
 ```

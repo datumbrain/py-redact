@@ -3,6 +3,8 @@ import logging
 
 from docx import Document
 
+logger = logging.getLogger("docx-redact")
+
 
 class DocxRedactor:
     def __init__(self, doc_obj_path, regexes, replace_char):
@@ -36,8 +38,6 @@ class DocxRedactor:
         :param output_file_path (string): path of the file to write the result to
         :return:
         """
-        logging.basicConfig(level=logging.INFO)
-        logger = logging.getLogger("docx-redact")
         doc_obj = Document(self.doc_obj_path)
         self.__redact_helper__(doc_obj)
         doc_obj.save(output_file_path)

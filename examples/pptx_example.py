@@ -3,10 +3,11 @@ import logging
 
 if __package__ is None:
     import sys
+
     sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-    from microsoft.pptx_redactor import PptxRedactor
+    from py_redact.pptx_redactor import PptxRedactor
 else:
-    from microsoft.pptx_redactor import PptxRedactor
+    from py_redact.pptx_redactor import PptxRedactor
 
 
 def main():
