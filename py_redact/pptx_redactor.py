@@ -29,20 +29,22 @@ class PptxRedactor:
                             whole_text = "".join(run.text for run in paragraph.runs)
                             inline = paragraph.runs
                             for i in range(len(inline)):
-                                if regex.search(inline[i].text):
-                                    text = regex.sub(self.replace_char * len(inline[i].text), inline[i].text)
+                                match_obj = regex.search(inline[i].text)
+                                if match_obj:
+                                    text = regex.sub(self.replace_char * len(match_obj.group(0)), inline[i].text)
                                     inline[i].text = text
                 if shape.has_table:
                     for row in shape.table.rows:
                         for cell in row.cells:
-                            if (regex.search(cell.text)):
-                                text = regex.sub(self.replace_char * len(cell.text), cell.text)
+                            match_obj = regex.search(cell.text)
+                            if match_obj:
+                                text = regex.sub(self.replace_char * len(match_obj.group(0)), cell.text)
                                 cell.text = text
             for notes_slide in notes_slides:
                 text_frame = notes_slide.notes_text_frame
                 m = regex.search(text_frame.text)
                 if (m):
-                    text = regex.sub(self.replace_char * len(text_frame.text), text_frame.text)
+                    text = regex.sub(self.replace_char * len(m.group(0)), text_frame.text)
                     text_frame.text = text
 
     def redact(self, output_file_path):
@@ -51,7 +53,6 @@ class PptxRedactor:
         :param output_file_path (string): path of the file to write the result
         :return:
         """
-        help(self.__redact_helper__)
         prs = Presentation(self.ppt_obj_path)
         # To get shapes in your slides
         slides = [slide for slide in prs.slides]
