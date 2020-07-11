@@ -24,8 +24,9 @@ class DocxRedactor:
                 if regex.search(p.text):
                     inline = p.runs
                     for i in range(len(inline)):
-                        if regex.search(inline[i].text):
-                            text = regex.sub(self.replace_char * len(inline[i].text), inline[i].text)
+                        match_obj = regex.search(inline[i].text)
+                        if match_obj:
+                            text = regex.sub(self.replace_char * len(match_obj.group(0)), inline[i].text)
                             inline[i].text = text
             for table in doc_obj.tables:
                 for row in table.rows:
