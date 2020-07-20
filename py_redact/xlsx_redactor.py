@@ -1,9 +1,6 @@
 import re
-import logging
 import openpyxl
 from openpyxl.utils.cell import get_column_letter
-
-logger = logging.getLogger("docx-redact")
 
 
 class XlsxRedactor:
@@ -36,6 +33,6 @@ class XlsxRedactor:
                             new_val = regex.sub(self.replace_char * len(match_obj.group(0)), old_val)
                             cell.value = new_val
         if self.xlsx_obj_path == output_file_path:
-            logger.warning("Input and Output files are same!")
+            print("Input and Output files are same!")
         wb.save(output_file_path)
-        logging.info("Updated file saved as: " + output_file_path)
+        print("Updated file saved as: " + output_file_path)

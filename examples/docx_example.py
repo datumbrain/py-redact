@@ -1,5 +1,4 @@
 from os import path
-import logging
 
 if __package__ is None:
     import sys
@@ -11,12 +10,10 @@ else:
 
 
 def main():
-    logging.basicConfig(level=logging.INFO)
-    logger = logging.getLogger("redact")
     if len(sys.argv) < 3:
-        logger.error("Not Enough Arguments!")
+        print("Not Enough Arguments!")
     elif path.isfile(sys.argv[1]) == 0:
-        logger.error("No such file : " + sys.argv[1])
+        print("No such file : " + sys.argv[1])
     else:
         replace_char = '*'
         input_file = sys.argv[1]

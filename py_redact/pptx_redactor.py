@@ -1,9 +1,5 @@
 import re
-import logging
-
 from pptx import Presentation
-
-logger = logging.getLogger("pptx-redact")
 
 
 class PptxRedactor:
@@ -65,6 +61,6 @@ class PptxRedactor:
                 notes_slides.append(slide.notes_slide)
         self.__redact_helper__(shapes, notes_slides)
         if self.ppt_obj_path == output_file_path:
-            logger.warning("Input and Output files are same!")
-        logger.info(" Updated file saved as: " + output_file_path)
+            print("Input and Output files are same!")
+        print(" Updated file saved as: " + output_file_path)
         prs.save(output_file_path)
