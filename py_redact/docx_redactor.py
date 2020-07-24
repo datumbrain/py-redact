@@ -18,23 +18,23 @@ class DocxRedactor:
         for reg in self.regexes:
             regex = re.compile(reg)
             for section in doc_obj.sections:
-                footer = section.footer
                 header = section.header
-                for paragraph in footer.paragraphs:
-                    if regex.search(paragraph.text):
-                        inline = paragraph.runs
+                footer = section.footer
+                for p in header.paragraphs:
+                    if regex.search(p.text):
+                        inline = p.runs
                         for i in range(len(inline)):
-                            match = regex.search(inline[i].text)
-                            if match:
-                                text = regex.sub(self.replace_char * len(match.group(0)), inline[i].text)
+                            match_obj = regex.search(inline[i].text)
+                            if match_obj:
+                                text = regex.sub(self.replace_char * len(match_obj.group(0)), inline[i].text)
                                 inline[i].text = text
-                for paragraph in header.paragraphs:
-                    if regex.search(paragraph.text):
-                        inline = paragraph.runs
+                for p in footer.paragraphs:
+                    if regex.search(p.text):
+                        inline = p.runs
                         for i in range(len(inline)):
-                            match = regex.search(inline[i].text)
-                            if match:
-                                text = regex.sub(self.replace_char * len(match.group(0)), inline[i].text)
+                            match_obj = regex.search(inline[i].text)
+                            if match_obj:
+                                text = regex.sub(self.replace_char * len(match_obj.group(0)), inline[i].text)
                                 inline[i].text = text
             for p in doc_obj.paragraphs:
                 if regex.search(p.text):
